@@ -2,40 +2,41 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
-type number struct {
-	day      int
-	capacity int
+func max(a,b int)int{
+	if a<b{
+		return b
+	}
+	return a
 }
 
 func main() {
 	n := 0
 	fmt.Scan(&n)
-	numbers := make([]number, n+1)
+	array := make([]int, n+1)
+	front := make([]int, n+1)
+	back := make([]int, n+1)
 
 	for i := 1; i <= n; i++ {
-		fmt.Scan(&numbers[i].capacity)
-		numbers[i].day = i
+		fmt.Scan(&array[i])
 	}
-	sort.Slice(numbers, func(i, j int) bool { return numbers[i].capacity > numbers[j].capacity })
+
+	front[1] = array[1]
+	for i := 2; i <= n; i++ {
+		front[i] = max(array[i], front[i-1])
+	}
+
+	back[n] = array[n]
+	for i := n - 1; i >= 1; i-- {
+		back[i] = max(array[i], back[i+1])
+	}
 
 	d := 0
 	fmt.Scan(&d)
-	answers := make([]int, d)
 	for i := 0; i < d; i++ {
 		l, r := 0, 0
 		fmt.Scan(&l, &r)
-		for j := 0; j <= n; j++ {
-			if numbers[j].day < l || numbers[j].day > r {
-				answers[i] = numbers[j].capacity
-				break
-			}
-		}
-	}
-
-	for i := 0; i < d; i++ {
-		fmt.Println(answers[i])
+		fmt.Println(max(front[l-1],back[r+1]))
 	}
 }
