@@ -6,9 +6,9 @@ import (
 )
 
 type numbers struct{
-	number int
+	before int
 	index int
-	compressioned int
+	pressed int
 }
 
 func main(){
@@ -16,24 +16,24 @@ func main(){
 	fmt.Scan(&n)
 	array:=make([]numbers,n+1)
 	for i:=1;i<=n;i++{
-		fmt.Scan(&array[i].number)
+		fmt.Scan(&array[i].before)
 		array[i].index=i
 	}
 	
-	sort.Slice(array ,func (i,j int)bool  {return array[i].number < array[j].number})
+	sort.Slice(array ,func (i,j int)bool  {return array[i].before < array[j].before})
 
-	comp := 0
+	pressed_idx := 0
 	for i:=1;i<=n;i++{
-		if array[i].number != array[i-1].number{
-			comp++
+		if array[i].before != array[i-1].before{
+			pressed_idx++
 		}
-		array[i].compressioned=comp
+		array[i].pressed=pressed_idx
 	}
 
 	sort.Slice(array, func(i, j int)bool{return array[i].index < array[j].index})
 
 	for i:=1;i<=n;i++{
-		fmt.Print(array[i].compressioned, " ")
+		fmt.Print(array[i].pressed, " ")
 	}
 	fmt.Println()
 }
