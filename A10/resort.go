@@ -4,8 +4,8 @@ import (
 	"fmt"
 )
 
-func max(a,b int)int{
-	if a<b{
+func max(a, b int) int {
+	if a < b {
 		return b
 	}
 	return a
@@ -37,6 +37,6 @@ func main() {
 	for i := 0; i < d; i++ {
 		l, r := 0, 0
 		fmt.Scan(&l, &r)
-		fmt.Println(max(front[l-1],back[r+1]))
+		fmt.Println(max(front[l-1], back[r+1]))
 	}
 }

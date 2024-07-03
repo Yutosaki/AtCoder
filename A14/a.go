@@ -44,7 +44,7 @@ func main() {
 
 	sort.Ints(CD)
 
-	for _,v := range AB {
+	for _, v := range AB {
 		left := 0
 		right := n*n - 1
 
