@@ -5,20 +5,17 @@ import "fmt"
 func main() {
 	a, b := 0, 0
 	fmt.Scan(&a, &b)
-	a, b = bigFirst(a, b)
 
-	for b != 0 {
+	for a != 0 {
 		a, b = bigFirst(a, b)
-		a -= b
+		a = a % b
 	}
-	fmt.Println(a)
+	fmt.Println(b)
 }
 
 func bigFirst(a, b int) (int, int) {
 	if a < b {
-		tmp := b
-		b = a
-		a = tmp
+		a, b = b, a
 	}
 	return a, b
 }
