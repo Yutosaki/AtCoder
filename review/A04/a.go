@@ -1,18 +1,16 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
 	n := 0
 	fmt.Scan(&n)
 
-	binary := ""
+	ans := ""
 	for i := 0; i < 10; i++ {
-		binary = fmt.Sprintf("%d", n%2) + binary
+		ans = fmt.Sprintf("%d", n%2) + ans
 		n /= 2
 	}
 
-	fmt.Println(binary)
+	fmt.Println(ans)
 }
