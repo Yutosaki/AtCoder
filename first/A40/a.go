@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 func main() {
@@ -14,33 +13,14 @@ func main() {
 		fmt.Scan(&A[i])
 	}
 
-	sort.Ints(A)
-
-	changes := 0
-	current := A[0]
-	for i := 1; i < n; i++ {
-		if current != A[i] {
-			changes++
-		}
-	}
-
-	nums := make([]int, changes)
-	index := 0
-	current = A[0]
-	for i := 1; i < n; i++ {
-		if current == A[i] {
-			nums[index]++ //一個少なくカウント
-		} else {
-			current = A[i]
-			index++
-		}
+	count := make([]int, 101)
+	for i := 0; i < n; i++ {
+		count[A[i]]++
 	}
 
 	ans := 0
-	for i := 0; i < changes; i++ {
-		if nums[i]+1 >= 3 {
-			ans += nC3(nums[i] + 1)
-		}
+	for i := 1; i <= 100; i++ {
+		ans += nC3(count[i])
 	}
 
 	fmt.Println(ans)
