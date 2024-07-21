@@ -34,7 +34,7 @@ func main() {
 
 	for i := 1; i <= h; i++ {
 		for j := 1; j <= w; j++ {
-			fmt.Printf("%d ", matrix[i][j])
+			fmt.Print(matrix[i][j], " ")
 		}
 		fmt.Println()
 	}
