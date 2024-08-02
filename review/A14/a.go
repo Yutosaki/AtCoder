@@ -12,6 +12,7 @@ func main() {
 	B := make([]int, n)
 	C := make([]int, n)
 	D := make([]int, n)
+
 	for i := 0; i < n; i++ {
 		fmt.Scan(&A[i])
 	}
@@ -27,6 +28,7 @@ func main() {
 
 	P := make([]int, n*n)
 	Q := make([]int, n*n)
+
 	for i := 0; i < n; i++ {
 		for j := 0; j < n; j++ {
 			P[i*n+j] = A[i] + B[j]
@@ -40,7 +42,7 @@ func main() {
 	sort.Slice(Q, func(i, j int) bool { return Q[i] < Q[j] })
 
 	for i := 0; i < len(P); i++ {
-		if closest(k-P[i], Q) {
+		if isExist(k-P[i], Q) {
 			fmt.Println("Yes")
 			return
 		}
@@ -48,18 +50,18 @@ func main() {
 	fmt.Println("No")
 }
 
-func closest(target int, array []int) bool {
+func isExist(target int, array []int) bool {
 	left := 0
 	right := len(array) - 1
 
 	for left <= right {
 		mid := (left + right) / 2
-		if array[mid] < target {
-			left = mid + 1
-		} else if array[mid] > target {
-			right = mid - 1
-		} else {
+		if array[mid] == target {
 			return true
+		} else if array[mid] < target {
+			left = mid + 1
+		} else {
+			right = mid - 1
 		}
 	}
 	return false
