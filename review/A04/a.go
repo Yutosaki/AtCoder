@@ -5,11 +5,11 @@ import "fmt"
 func main() {
 	n := 0
 	fmt.Scan(&n)
-	ans := ""
-	for i := 0; i < 10; i++ {
-		ans = fmt.Sprintf("%d", n%2) + ans
-		n /= 2
-	}
 
-	fmt.Println(ans)
+	answer := ""
+	for i := 1; i <= 10; i++ {
+		answer = fmt.Sprintf("%d", n%2) + answer
+		n = n / 2
+	}
+	fmt.Println(answer)
 }
