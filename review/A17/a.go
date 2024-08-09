@@ -18,28 +18,30 @@ func main() {
 	root[2] = A[2]
 	for i := 3; i <= n; i++ {
 		if root[i-1]+A[i] < root[i-2]+B[i] {
-			root[i] = A[i] + root[i-1]
+			root[i] = root[i-1] + A[i]
 		} else {
-			root[i] = B[i] + root[i-2]
+			root[i] = root[i-2] + B[i]
 		}
 	}
 
-	answer := make([]int, 0)
-	place := n
-	answer = append(answer, place)
-	for place != 1 {
-		if root[place] == root[place-1]+A[place] {
-			answer = append(answer, place-1)
-			place--
+	revRoot := make([]int, 1)
+	revRoot[0] = n
+	for i := n; i >= 1; i-- {
+		if root[i] == root[i-1]+A[i] {
+			if i-1 != revRoot[len(revRoot)-1] {
+				revRoot = append(revRoot, i-1)
+			}
 		} else {
-			answer = append(answer, place-2)
-			place -= 2
+			if i-2 != revRoot[len(revRoot)-1] {
+				revRoot = append(revRoot, i-2)
+			}
+			i--
 		}
 	}
-	fmt.Println(len(answer))
 
-	for i := len(answer) - 1; i >= 0; i-- {
-		fmt.Printf("%d ", answer[i])
+	fmt.Println(len(revRoot) - 1)
+	for i := len(revRoot) - 2; i >= 1; i-- {
+		fmt.Printf("%d ", revRoot[i])
 	}
-	fmt.Println()
+	fmt.Println(n)
 }
