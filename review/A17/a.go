@@ -5,11 +5,14 @@ import "fmt"
 func main() {
 	n := 0
 	fmt.Scan(&n)
+
 	A := make([]int, n+1)
 	B := make([]int, n+1)
+
 	for i := 2; i <= n; i++ {
 		fmt.Scan(&A[i])
 	}
+
 	for i := 3; i <= n; i++ {
 		fmt.Scan(&B[i])
 	}
@@ -24,24 +27,20 @@ func main() {
 		}
 	}
 
-	revRoot := make([]int, 1)
-	revRoot[0] = n
+	revroot := make([]int, 0)
 	for i := n; i >= 1; i-- {
 		if root[i] == root[i-1]+A[i] {
-			if i-1 != revRoot[len(revRoot)-1] {
-				revRoot = append(revRoot, i-1)
-			}
-		} else {
-			if i-2 != revRoot[len(revRoot)-1] {
-				revRoot = append(revRoot, i-2)
-			}
+			revroot = append(revroot, i-1)
+		} else if root[i] == root[i-2]+B[i] {
+			revroot = append(revroot, i-2)
 			i--
 		}
 	}
 
-	fmt.Println(len(revRoot) - 1)
-	for i := len(revRoot) - 2; i >= 1; i-- {
-		fmt.Printf("%d ", revRoot[i])
+	fmt.Println(len(revroot))
+
+	for i := len(revroot) - 2; i >= 0; i-- {
+		fmt.Printf("%d ", revroot[i])
 	}
 	fmt.Println(n)
 }
