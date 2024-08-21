@@ -4,14 +4,14 @@ import "fmt"
 
 func main() {
 	n, s := 0, 0
-	fmt.Scan(&n, &s)
 
+	fmt.Scan(&n, &s)
 	A := make([]int, n+1)
 	for i := 1; i <= n; i++ {
 		fmt.Scan(&A[i])
 	}
 
-	dp := make([][]bool, n+1)
+	dp := make([][]bool, n+1) //カードをi枚使って合計をjにすることは可能か
 	for i := 0; i <= n; i++ {
 		dp[i] = make([]bool, s+1)
 	}
