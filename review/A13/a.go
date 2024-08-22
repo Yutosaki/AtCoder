@@ -5,25 +5,24 @@ import "fmt"
 func main() {
 	n, k := 0, 0
 	fmt.Scan(&n, &k)
-
-	A := make([]int, n)
-	for i := 0; i < n; i++ {
+	A := make([]int, n+1)
+	for i := 1; i <= n; i++ {
 		fmt.Scan(&A[i])
 	}
 
-	maxEnd := make([]int, n)
 	counter := 0
-	for i := 0; i < n-1; i++ {
-		if i == 0 {
-			maxEnd[i] = 0
+	end := make([]int, n+1)
+	for i := 1; i <= n; i++ {
+		if A[i] == 1 {
+			end[i] = 1
 		} else {
-			maxEnd[i] = maxEnd[i-1]
+			end[i] = end[i-1]
 		}
 
-		for maxEnd[i] < n && A[maxEnd[i]]-A[i] <= k {
-			maxEnd[i]++
+		for end[i] <= n && A[end[i]]-A[i] <= k {
+			end[i]++
 		}
-		counter += maxEnd[i] - i - 1
+		counter += end[i] - i - 1
 	}
 
 	fmt.Println(counter)
