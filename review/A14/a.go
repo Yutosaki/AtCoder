@@ -6,13 +6,13 @@ import (
 )
 
 func main() {
-	n, k := 0, 0
-	fmt.Scan(&n, &k)
+	n, target := 0, 0
+	fmt.Scan(&n, &target)
+
 	A := make([]int, n)
 	B := make([]int, n)
 	C := make([]int, n)
 	D := make([]int, n)
-
 	for i := 0; i < n; i++ {
 		fmt.Scan(&A[i])
 	}
@@ -34,15 +34,17 @@ func main() {
 			P[i*n+j] = A[i] + B[j]
 		}
 	}
+
 	for i := 0; i < n; i++ {
 		for j := 0; j < n; j++ {
 			Q[i*n+j] = C[i] + D[j]
 		}
 	}
+
 	sort.Slice(Q, func(i, j int) bool { return Q[i] < Q[j] })
 
-	for i := 0; i < len(P); i++ {
-		if isExist(k-P[i], Q) {
+	for i := 0; i < n*n; i++ {
+		if findPlace(target-P[i], Q) {
 			fmt.Println("Yes")
 			return
 		}
@@ -50,10 +52,9 @@ func main() {
 	fmt.Println("No")
 }
 
-func isExist(target int, array []int) bool {
+func findPlace(target int, array []int) bool {
 	left := 0
 	right := len(array) - 1
-
 	for left <= right {
 		mid := (left + right) / 2
 		if array[mid] == target {
