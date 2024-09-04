@@ -10,7 +10,7 @@ func max(a, b int) int {
 }
 
 func main() {
-	s, t:="",""
+	s,t:="",""
 	fmt.Scan(&s, &t)
 
 	dp:=make([][]int, len(s)+1)

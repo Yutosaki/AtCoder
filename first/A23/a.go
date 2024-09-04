@@ -15,7 +15,7 @@ func min(i, j int) int {
 func main() {
 	n, m := 0, 0
 	fmt.Scan(&n, &m)
-	
+
 	A := make([][]int, m+1)
 	for i := 1; i <= m; i++ {
 		A[i] = make([]int, n+1)
