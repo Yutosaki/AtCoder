@@ -2,31 +2,32 @@ package main
 
 import "fmt"
 
-func max(a, b int) int {
-	if a> b{
-		return a
+func max(i, j int) int {
+	if i > j {
+		return i
 	}
-	return b
+	return j
 }
 
 func main() {
-	s,t:="",""
-	fmt.Scan(&s, &t)
+	S := ""
+	T := ""
+	fmt.Scan(&S, &T)
 
-	dp:=make([][]int, len(s)+1)
-	for i:=0; i<len(s)+1; i++ {
-		dp[i]=make([]int, len(t)+1)
+	longest := make([][]int, len(S)+1)
+	for i := 0; i <= len(S); i++ {
+		longest[i] = make([]int, len(T)+1)
 	}
 
-	for i:=1; i<=len(s); i++ {
-		for j:=1; j<=len(t); j++ {
-			if s[i-1]==t[j-1] {
-				dp[i][j]=dp[i-1][j-1]+1
+	for i := 1; i <= len(S); i++ {
+		for j := 1; j <= len(T); j++ {
+			if S[i-1] == T[j-1] {
+				longest[i][j] = longest[i-1][j-1] + 1
 			} else {
-				dp[i][j]=max(dp[i-1][j], dp[i][j-1])
+				longest[i][j] = max(longest[i][j-1], longest[i-1][j])
 			}
 		}
 	}
 
-	fmt.Println(dp[len(s)][len(t)])
+	fmt.Println(longest[len(S)][len(T)])
 }
