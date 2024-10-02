@@ -6,11 +6,11 @@ func main() {
 	var n int
 	fmt.Scan(&n)
 
-	P := make([]int, n+2)
-	A := make([]int, n+2)
+	RemoveFrom := make([]int, n+2)
+	Point := make([]int, n+2)
 
 	for i := 1; i <= n; i++ {
-		fmt.Scan(&P[i], &A[i])
+		fmt.Scan(&RemoveFrom[i], &Point[i])
 	}
 
 	dp := make([][]int, n+2)
@@ -18,26 +18,26 @@ func main() {
 		dp[i] = make([]int, n+2)
 	}
 
-	for len := n - 2; len >= 0; len-- {
-		for l := 1; l <= n-len; l++ {
-			r := l + len
-			score1 := 0
-			score2 := 0
+	for length := n - 2; length >= 0; length-- {
+		for left := 1; left <= n-length; left++ {
+			right := left + length
+			scoreLeft := 0
+			scoreRight := 0
 
-			if l <= P[l-1] && P[l-1] <= r {
-				score1 = A[l-1]
+			if left <= RemoveFrom[left-1] && RemoveFrom[left-1] <= right {
+				scoreLeft = Point[left-1]
 			}
 
-			if l <= P[r+1] && P[r+1] <= r {
-				score2 = A[r+1]
+			if left <= RemoveFrom[right+1] && RemoveFrom[right+1] <= right {
+				scoreRight = Point[right+1]
 			}
 
-			if l == 1 {
-				dp[l][r] = dp[l][r+1] + score2
-			} else if r == n {
-				dp[l][r] = dp[l-1][r] + score1
+			if left == 1 {
+				dp[left][right] = dp[left][right+1] + scoreRight
+			} else if right == n {
+				dp[left][right] = dp[left-1][right] + scoreLeft
 			} else {
-				dp[l][r] = max(dp[l-1][r]+score1, dp[l][r+1]+score2)
+				dp[left][right] = max(dp[left-1][right]+scoreLeft, dp[left][right+1]+scoreRight)
 			}
 		}
 	}
